@@ -27,7 +27,7 @@ import java.util.UUID;
 
 public class ServiceBooking extends AppCompatActivity {
 
-    private String serviceId = "";
+    private String serviceId = "S1";
     private FirebaseUser currentUser;
 
     private FirebaseFirestore db;
