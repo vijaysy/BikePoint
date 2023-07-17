@@ -7,4 +7,11 @@
     <string name="click_to_login">Click to login</string>
     <string name="click_to_register">Click to register</string>
     <string name="logout">Logout</string>
+    <string name="booking_a_service">Booking a Service</string>
+    <string name="bike_number">Bike number</string>
+    <string name="book_service">Book service</string>
+    <string name="service">Service</string>
+    <string name="service_history">Service History</string>
+    <string name="bookings">Bookings</string>
+    <string name="update_bookings">Update Bookings</string>
 </resources>

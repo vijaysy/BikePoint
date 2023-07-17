@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.bikepoint.user.ListServices;
+import com.example.bikepoint.user.ServiceBooking;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -16,7 +18,11 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
-    Button button;
+    Button logoutBtn;
+
+    Button svcBtn;
+
+    Button svcHistoryBtn;
     TextView textView;
     FirebaseUser user;
 
@@ -26,8 +32,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         auth = FirebaseAuth.getInstance();
-        button = findViewById(R.id.logout);
+        logoutBtn = findViewById(R.id.logout);
+        svcBtn = findViewById(R.id.service);
+        svcHistoryBtn = findViewById(R.id.service_history);
+
         textView = findViewById(R.id.user_details);
+
         user = auth.getCurrentUser();
 
         if (Objects.isNull(user)){
@@ -38,11 +48,29 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(user.getEmail());
         }
 
-        button.setOnClickListener(new View.OnClickListener() {
+        svcBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ServiceBooking.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        svcHistoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ListServices.class);
                 startActivity(intent);
                 finish();
             }
