@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "64436300005",
+    "project_id": "bikepoint-4fa1c",
+    "storage_bucket": "bikepoint-4fa1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64436300005:android:30a8515a44191692564c0c",
+        "android_client_info": {
+          "package_name": "com.example.bikepoint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64436300005-nc1e5b00kuiorcuals0ggc2tvekn9ebd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe67mNaytQQkpuS_gC8JPshtcU4iWmKKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64436300005-nc1e5b00kuiorcuals0ggc2tvekn9ebd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
