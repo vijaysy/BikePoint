@@ -1,12 +1,17 @@
 package com.example.bikepoint.user;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.bikepoint.Login;
+import com.example.bikepoint.MainActivity;
 import com.example.bikepoint.R;
 import com.example.bikepoint.models.Booking;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +30,8 @@ import java.util.Objects;
 public class ListServices extends AppCompatActivity {
 
     private ListView bookingListView;
+
+    private Button homeBtn;
     private List<Booking> bookingList;
     private ArrayAdapter<Booking> bookingAdapter;
 
@@ -42,7 +49,7 @@ public class ListServices extends AppCompatActivity {
         setContentView(R.layout.activity_list_services);
 
         bookingListView = findViewById(R.id.bookingListView);
-
+        homeBtn = findViewById(R.id.user_home);
         // Get the current user
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -58,6 +65,15 @@ public class ListServices extends AppCompatActivity {
 
 
         CollectionReference booksCollection = db.collection("bookings");
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         booksCollection.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
