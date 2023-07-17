@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.bikepoint.Login;
 import com.example.bikepoint.MainActivity;
 import com.example.bikepoint.R;
 import com.example.bikepoint.models.Booking;
@@ -29,13 +28,8 @@ import java.util.Objects;
 
 public class ListServices extends AppCompatActivity {
 
-    private ListView bookingListView;
-
-    private Button homeBtn;
     private List<Booking> bookingList;
     private ArrayAdapter<Booking> bookingAdapter;
-
-    private FirebaseFirestore db;
 
     private FirebaseUser currentUser;
 
@@ -48,8 +42,8 @@ public class ListServices extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_services);
 
-        bookingListView = findViewById(R.id.bookingListView);
-        homeBtn = findViewById(R.id.user_home);
+        ListView bookingListView = findViewById(R.id.bookingListView);
+        Button homeBtn = findViewById(R.id.user_home);
         // Get the current user
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -61,7 +55,7 @@ public class ListServices extends AppCompatActivity {
         bookingAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, bookingList);
         bookingListView.setAdapter(bookingAdapter);
 
-        db = FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
         CollectionReference booksCollection = db.collection("bookings");

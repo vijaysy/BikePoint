@@ -112,9 +112,6 @@ public class Admin extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Mark booking as done in Firebase Database
-
-
                 DocumentReference bookingRef = booksCollection.document(book.getDocumentId());
                 bookingRef.update("completed",true)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
