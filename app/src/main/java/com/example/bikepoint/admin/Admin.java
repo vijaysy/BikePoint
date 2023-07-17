@@ -5,13 +5,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.bikepoint.Login;
 import com.example.bikepoint.R;
 import com.example.bikepoint.models.Booking;
 import com.example.bikepoint.user.ListServices;
@@ -36,36 +39,42 @@ import java.util.Objects;
 
 public class Admin extends AppCompatActivity {
 
-    private ListView bookingListView;
     private List<Booking> bookingList;
     private ArrayAdapter<Booking> bookingAdapter;
-    private FirebaseFirestore db;
 
-    private FirebaseUser currentUser;
-
+    Button logoutBtn;
     private CollectionReference booksCollection;
 
     public Admin() {
     }
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        bookingListView = findViewById(R.id.bookingListViewAdmn);
+        ListView bookingListView = findViewById(R.id.bookingListViewAdmn);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        currentUser = firebaseAuth.getCurrentUser();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
+        logoutBtn = findViewById(R.id.logout_admn);
 
         bookingList = new ArrayList<>();
         bookingAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, bookingList);
         bookingListView.setAdapter(bookingAdapter);
 
-        db = FirebaseFirestore.getInstance();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         booksCollection = db.collection("bookings");
 
