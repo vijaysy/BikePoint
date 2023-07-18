@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bikepoint.admin.Admin;
+import com.example.bikepoint.user.UserActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -43,7 +44,7 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }else {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), UserActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -105,9 +106,9 @@ public class Login extends AppCompatActivity {
                                         startActivity(intent);
                                         finish();
                                     }else {
-                                        Toast.makeText(Login.this, "Login Successfull.",
+                                        Toast.makeText(Login.this, "Login Successful.",
                                                 Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), UserActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }

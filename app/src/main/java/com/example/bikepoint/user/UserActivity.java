@@ -1,4 +1,4 @@
-package com.example.bikepoint;
+package com.example.bikepoint.user;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,14 +8,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.bikepoint.user.ListServices;
-import com.example.bikepoint.user.ServiceBooking;
+import com.example.bikepoint.Login;
+import com.example.bikepoint.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     Button logoutBtn;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_user);
 
         auth = FirebaseAuth.getInstance();
         logoutBtn = findViewById(R.id.logout);
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         svcHistoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ListServices.class);
+                Intent intent = new Intent(getApplicationContext(), ServicesHistory.class);
                 startActivity(intent);
                 finish();
             }

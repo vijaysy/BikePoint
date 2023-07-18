@@ -9,16 +9,19 @@ public class Booking {
     private String bikeNumber;
     private boolean completed;
 
+    private Status status;
+
     public Booking() {
         // Default constructor required for calls to DataSnapshot.getValue(Booking.class)
     }
 
-    public Booking(String userId, String bookingId, String sevId, String bikeNumber, boolean completed) {
+    public Booking(String userId, String bookingId, String sevId, String bikeNumber, boolean completed,Status status) {
         this.userId = userId;
         this.bookingId = bookingId;
         this.sevId = sevId;
         this.bikeNumber = bikeNumber;
         this.completed = completed;
+        this.status=status;
     }
 
     public String getUserId() {
@@ -69,6 +72,13 @@ public class Booking {
         this.documentId = documentId;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {
@@ -80,5 +90,6 @@ public class Booking {
                 ", completed=" + completed +
                 '}';
     }
+
 }
 

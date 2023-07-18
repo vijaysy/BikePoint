@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
     android:gravity="center"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".user.UserActivity">
 
     <TextView
         android:id="@+id/user_details"
@@ -15,25 +17,29 @@
         android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:text="@string/service"
         android:id="@+id/service"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="15dp"
         android:layout_height="wrap_content"/>
 
     <Button
         android:text="@string/service_history"
         android:id="@+id/service_history"
-        android:layout_width="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <Button
         android:text="@string/logout"
         android:id="@+id/logout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="15dp"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>

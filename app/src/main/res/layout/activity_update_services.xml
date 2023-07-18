@@ -4,21 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".user.ListServices">
-
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/bookings"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginBottom="16dp" />
+    android:gravity="center"
+    android:padding="15dp"
+    tools:context=".admin.UpdateServices">
 
     <ListView
-        android:id="@+id/bookingListView"
+        android:id="@+id/bookingListViewAdmn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -26,10 +17,11 @@
         android:dividerHeight="1dp" />
 
     <Button
-        android:text="@string/home"
-        android:id="@+id/user_home"
+        android:text="@string/admin_page"
+        android:id="@+id/logout_admn"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
         android:layout_height="wrap_content"/>
+
 
 </LinearLayout>

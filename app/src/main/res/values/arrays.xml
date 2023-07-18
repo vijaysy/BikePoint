@@ -5,4 +5,11 @@
         <item>S2</item>
         <item>S3</item>
     </string-array>
+    <string-array name="spinner_booking_status">
+        <item>RECEIVED</item>
+        <item>COMPLETED</item>
+        <item>PENDING</item>
+        <item>STARTED</item>
+        <item>DELIVERED</item>
+    </string-array>
 </resources>

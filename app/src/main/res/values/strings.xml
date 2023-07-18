@@ -15,4 +15,6 @@
     <string name="bookings">Bookings</string>
     <string name="update_bookings">Update Bookings</string>
     <string name="home">Home</string>
+    <string name="admin_page">Admin Page</string>
+    <string name="update_service">Update service</string>
 </resources>

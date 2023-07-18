@@ -12,9 +12,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.bikepoint.MainActivity;
 import com.example.bikepoint.R;
 import com.example.bikepoint.models.Booking;
+import com.example.bikepoint.models.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,8 +59,9 @@ public class ServiceBooking extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                serviceId =  adapterView.getItemAtPosition(i).toString();
+                serviceId = adapterView.getItemAtPosition(i).toString();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -81,7 +82,7 @@ public class ServiceBooking extends AppCompatActivity {
                 if (!serviceId.isEmpty() && !bikeNum.isEmpty()) {
 
                     String bookingId = String.valueOf(UUID.randomUUID());
-                    Booking booking = new Booking(currentUser.getUid(), bookingId, serviceId, bikeNum,false);
+                    Booking booking = new Booking(currentUser.getUid(), bookingId, serviceId, bikeNum, false, Status.RECEIVED);
 
                     bookDocument.set(booking)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -99,7 +100,7 @@ public class ServiceBooking extends AppCompatActivity {
                     // Clear the input fields
                     bikeNumberView.setText("");
 
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), UserActivity.class);
                     startActivity(intent);
                     finish();
 
