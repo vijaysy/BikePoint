@@ -109,7 +109,6 @@ public class BookingAdapter extends ArrayAdapter<Booking> {
         userId.setText(booking.getUserId());
         bikeNumber.setText(booking.getBikeNumber());
         bookingId.setText(booking.getBookingId());
-        sevId.setText(booking.getSevId());
         completed.setText(String.valueOf(booking.isCompleted()));
         status.setText(booking.getStatus().toString());
 

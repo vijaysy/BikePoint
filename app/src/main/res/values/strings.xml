@@ -17,4 +17,7 @@
     <string name="home">Home</string>
     <string name="admin_page">Admin Page</string>
     <string name="update_service">Update service</string>
+    <string name="add">Add</string>
+    <string name="checkout">Checkout</string>
+    <string name="view_basket">View Basket</string>
 </resources>

@@ -51,7 +51,7 @@ public class UserActivity extends AppCompatActivity {
         svcBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ServiceBooking.class);
+                Intent intent = new Intent(getApplicationContext(), Cart.class);
                 startActivity(intent);
                 finish();
             }

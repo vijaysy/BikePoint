@@ -14,7 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.bikepoint.R;
 import com.example.bikepoint.models.Booking;
+import com.example.bikepoint.models.Spares;
 import com.example.bikepoint.models.Status;
+import com.example.bikepoint.store.FireStoreHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +25,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class ServiceBooking extends AppCompatActivity {
@@ -30,7 +34,7 @@ public class ServiceBooking extends AppCompatActivity {
     private String serviceId = "S1";
     private FirebaseUser currentUser;
 
-    private FirebaseFirestore db;
+    private FireStoreHelper fireStoreHelper;
 
     Button buttonBookSvc;
 
@@ -41,11 +45,7 @@ public class ServiceBooking extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_booking);
 
-        // Initialize Firestore
-        db = FirebaseFirestore.getInstance();
-
-        CollectionReference booksCollection = db.collection("/bookings");
-        DocumentReference bookDocument = booksCollection.document();
+        fireStoreHelper = new FireStoreHelper();
 
         buttonBookSvc = findViewById(R.id.btn_book_svc);
         bikeNumberView = findViewById(R.id.bike_number);
@@ -82,22 +82,48 @@ public class ServiceBooking extends AppCompatActivity {
                 if (!serviceId.isEmpty() && !bikeNum.isEmpty()) {
 
                     String bookingId = String.valueOf(UUID.randomUUID());
-                    Booking booking = new Booking(currentUser.getUid(), bookingId, serviceId, bikeNum, false, Status.RECEIVED);
-
-                    bookDocument.set(booking)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(ServiceBooking.this, "Book stored successfully!", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(ServiceBooking.this, "Error storing book!", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+                    List<Spares> spares = new ArrayList<>();
+                    spares.add(new Spares("Tire", 100, bookingId));
 
 
-                    // Clear the input fields
+                    Booking booking = new Booking.Builder()
+                            .userId(currentUser.getUid())
+                            .bookingId(bookingId)
+                            .bikeNumber(bikeNum)
+                            .completed(false)
+                            .status(Status.RECEIVED)
+                            .createdAt(System.currentTimeMillis())
+                            .updatedAt(System.currentTimeMillis())
+                            .email(currentUser.getEmail())
+                            .amount(1000L)
+                            .isAmountPaid(false)
+                            .build();
+
+                    fireStoreHelper.writeBooking(booking, new FireStoreHelper.WriteBookingCallback() {
+                        @Override
+                        public void onBookingWritten(String documentId) {
+                            Toast.makeText(ServiceBooking.this, "Book stored successfully!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onWriteBookingFailure(Exception e) {
+                            Toast.makeText(ServiceBooking.this, "Error storing book", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+                    spares.forEach(s -> fireStoreHelper.writeSpares(s, new FireStoreHelper.WriteSparesCallback() {
+                        @Override
+                        public void onWritten(String documentId) {
+                            Toast.makeText(ServiceBooking.this, "Spares stored successfully!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onWriteFailure(Exception e) {
+                            Toast.makeText(ServiceBooking.this, "Error storing Spares", Toast.LENGTH_SHORT).show();
+                        }
+                    }));
+
                     bikeNumberView.setText("");
 
                     Intent intent = new Intent(getApplicationContext(), UserActivity.class);
