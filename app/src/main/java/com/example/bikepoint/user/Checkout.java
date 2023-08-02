@@ -52,7 +52,6 @@ public class Checkout extends AppCompatActivity {
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();
-//        totalAmountText = "Total Amount: " + String.format("%.2f", 0);
 
         bikeNumberView = findViewById(R.id.bike_number);
         recyclerViewBasket = findViewById(R.id.recyclerViewBasket);
@@ -76,7 +75,8 @@ public class Checkout extends AppCompatActivity {
         if (basketItems == null || basketItems.isEmpty()) {
             Toast.makeText(this, "Basket is empty", Toast.LENGTH_SHORT).show();
         } else {
-            basketAdapter = new ItemAdapter(basketItems, item -> {
+            totalAmount = calculateTotalAmount();
+            basketAdapter = new ItemAdapter(basketItems, (item, addItem, textViewTotalAmount) -> {
                 // Handle clicks on basket items if needed
             }, true);
 
@@ -168,8 +168,5 @@ public class Checkout extends AppCompatActivity {
         startActivity(intent);
         finish();
 
-
-
-        // Here you can proceed with the checkout process, e.g., payment gateway integration, order placement, etc.
     }
 }

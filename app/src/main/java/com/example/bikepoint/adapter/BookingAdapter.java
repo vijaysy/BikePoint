@@ -64,11 +64,10 @@ public class BookingAdapter extends ArrayAdapter<Booking> {
         Spinner spinner = itemView.findViewById(R.id.spinner);
         spinner.setVisibility(View.GONE);
 
-        TextView userId = itemView.findViewById(R.id.userId);
+        TextView emailId = itemView.findViewById(R.id.emailId);
         TextView bikeNumber = itemView.findViewById(R.id.bikeNumber);
         TextView bookingId = itemView.findViewById(R.id.bookingId);
-        TextView sevId = itemView.findViewById(R.id.sevId);
-        TextView completed = itemView.findViewById(R.id.completed);
+        TextView amount = itemView.findViewById(R.id.amount);
         TextView status = itemView.findViewById(R.id.status);
 
 
@@ -87,7 +86,6 @@ public class BookingAdapter extends ArrayAdapter<Booking> {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     String selectedItem = (String) parent.getItemAtPosition(position);
                     statusString = (String) parent.getItemAtPosition(position);
-                    ;
                     Toast.makeText(context, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
                 }
 
@@ -100,24 +98,27 @@ public class BookingAdapter extends ArrayAdapter<Booking> {
             svcUpdateButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    handleItemClick(position);
+                    handleItemClick(position, status);
                 }
             });
 
+
+
         }
 
-        userId.setText(booking.getUserId());
-        bikeNumber.setText(booking.getBikeNumber());
-        bookingId.setText(booking.getBookingId());
-        completed.setText(String.valueOf(booking.isCompleted()));
-        status.setText(booking.getStatus().toString());
+        emailId.setText(String.format("Email Address: %s", booking.getEmail()));
+        bikeNumber.setText(String.format("Vehicle number: %s", booking.getBikeNumber()));
+        bookingId.setText(String.format("Booking ID: %s", booking.getBookingId()));
+        amount.setText(String.format("Amount: %s", String.format("%d", booking.getAmount())));
+        status.setText(String.format("Status: %s", booking.getStatus().toString()));
 
         return itemView;
     }
 
-    private void handleItemClick(int position) {
+    private void handleItemClick(int position, TextView status) {
         Booking clickedBooking = bookingList.get(position);
         clickedBooking.setStatus(Status.valueOf(statusString));
+        status.setText(String.format("Status: %s", Status.valueOf(statusString)));
         fireStoreHelper.updateBooking(clickedBooking.getDocumentId(), clickedBooking, new FireStoreHelper.UpdateBookingCallback() {
             @Override
             public void onBookingUpdated(String userId) {

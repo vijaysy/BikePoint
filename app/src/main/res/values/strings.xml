@@ -20,4 +20,8 @@
     <string name="add">Add</string>
     <string name="checkout">Checkout</string>
     <string name="view_basket">View Basket</string>
+    <string name="remove">Remove</string>
+    <string name="pls">+</string>
+    <string name="mins">-</string>
+    <string name="generate_pdf">Generate PDF</string>
 </resources>

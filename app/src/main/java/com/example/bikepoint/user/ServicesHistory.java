@@ -21,13 +21,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class ServicesHistory extends AppCompatActivity {
-
     private List<Booking> bookingList;
-
     private FirebaseUser currentUser;
-
-    private FireStoreHelper fireStoreHelper;
-
     private BookingAdapter adapter;
 
     public ServicesHistory() {
@@ -38,7 +33,7 @@ public class ServicesHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services_history);
 
-        fireStoreHelper = new FireStoreHelper();
+        FireStoreHelper fireStoreHelper = new FireStoreHelper();
 
         ListView bookingListView = findViewById(R.id.bookingListView);
         Button homeBtn = findViewById(R.id.user_home);
@@ -66,7 +61,7 @@ public class ServicesHistory extends AppCompatActivity {
                 bookingList.clear();
                 for (Booking book : bookings) {
                     Toast.makeText(ServicesHistory.this, book.getUserId(), Toast.LENGTH_SHORT).show();
-                    if (Objects.equals(book.getUserId(), currentUser.getUid())){
+                    if (Objects.equals(book.getUserId(), currentUser.getUid())) {
                         bookingList.add(book);
                     }
                 }
